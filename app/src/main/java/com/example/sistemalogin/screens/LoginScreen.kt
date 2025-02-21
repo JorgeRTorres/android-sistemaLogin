@@ -40,11 +40,11 @@ fun LoginScreen(){
         Spacer(modifier = Modifier.padding(vertical = 15.dp))
 
         var usuario = remember { mutableStateOf("") }
-        OutlinedTextField(value = usuario.value, onValueChange = {usuario.value = it})
+        OutlinedTextField(value = usuario.value, onValueChange = {usuario.value = it}, label = { Text("Ingresa tu usuario") })
         Spacer(modifier = Modifier.padding(vertical = 5.dp))
 
         var password = remember { mutableStateOf("") }
-        OutlinedTextField(value = password.value, onValueChange = {password.value = it})
+        OutlinedTextField(value = password.value, onValueChange = {password.value = it}, label = { Text("Ingresa tu contraseña") })
         Spacer(modifier = Modifier.padding(vertical = 15.dp))
 
         Row (modifier = Modifier.fillMaxWidth(),
@@ -53,6 +53,5 @@ fun LoginScreen(){
                 Text(text = "Iniciar Sesion")
             }
         }
-
     }
 }
