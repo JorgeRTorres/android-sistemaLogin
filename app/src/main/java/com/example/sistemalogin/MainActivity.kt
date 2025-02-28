@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import com.example.sistemalogin.navegacion.AppNavegacion
 import com.example.sistemalogin.screens.LoginScreen
 import com.example.sistemalogin.ui.theme.SistemaLoginTheme
 
@@ -19,7 +21,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            SistemaLoginTheme { LoginScreen() }
+            SistemaLoginTheme { AppNavegacion() }
         }
     }
 }

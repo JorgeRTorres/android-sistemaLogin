@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -22,12 +21,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.sistemalogin.R
+import com.example.sistemalogin.navegacion.AppScrenns
 
 @Composable //indica que va a utilizar todas las herramientas de JetPAck compose
-fun LoginScreen(){
+@Preview
+fun LoginScreen(navController: NavController){
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             fontSize = 24.sp,
@@ -49,8 +52,11 @@ fun LoginScreen(){
 
         Row (modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center){
-            Button(onClick = {}, modifier = Modifier.width(220.dp)) {
+            Button(onClick = {
+                navController.navigate(route = AppScrenns.MainScreen.ruta)
+            }, modifier = Modifier.width(220.dp)) {
                 Text(text = "Iniciar Sesion")
+
             }
         }
     }
