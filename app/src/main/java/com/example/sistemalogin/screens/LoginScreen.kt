@@ -10,7 +10,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -59,7 +62,12 @@ fun LoginScreen(navController: NavController){
                           onValueChange = {usuario.value = it},
                           singleLine = true,
                           isError = errorUsuario.value,
-                          label = { Text("Ingresa tu usuario") })
+                          label = { Text("Ingresa tu usuario") },
+                          trailingIcon = {
+                              if (errorUsuario.value){
+                                  Icon(Icons.Filled.Warning, contentDescription = "Error", tint = Color.Red)
+                              }
+                          })
 
         if (errorUsuario.value){
             Text(color = Color.Red, text = "No deje usuario vacio")
@@ -72,7 +80,12 @@ fun LoginScreen(navController: NavController){
                           singleLine = true,
                           visualTransformation = PasswordVisualTransformation(),
                           isError = errorPassword.value,
-                          label = { Text("Ingresa tu contraseña") })
+                          label = { Text("Ingresa tu contraseña") },
+                          trailingIcon = {
+                              if (errorPassword.value){
+                                  Icon(Icons.Filled.Warning, contentDescription = "Error", tint = Color.Red)
+                              }
+                          })
         if (errorPassword.value){
             Text(color = Color.Red, text = "No deje password vacio")
         }
