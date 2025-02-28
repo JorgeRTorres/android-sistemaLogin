@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,7 +32,16 @@ import com.example.sistemalogin.navegacion.AppScrenns
 @Composable //indica que va a utilizar todas las herramientas de JetPAck compose
 @Preview
 fun LoginScreen(navController: NavController){
-    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+
+    var usuario = remember { mutableStateOf("") }
+    var password = remember { mutableStateOf("") }
+    var errorUsuario = remember { mutableStateOf(false) }
+    var errorPassword = remember { mutableStateOf(false) }
+
+
+    Column(modifier = Modifier.fillMaxSize(),
+           verticalArrangement = Arrangement.Center,
+           horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
@@ -39,24 +49,54 @@ fun LoginScreen(navController: NavController){
             text = "Sistema Login")
         Spacer(modifier = Modifier.padding(vertical = 15.dp))
 
-        Image(painter = painterResource(R.drawable.login), modifier = Modifier.height(80.dp).width(80.dp),contentDescription = "")
+        Image(painter = painterResource(R.drawable.login),
+              modifier = Modifier.height(80.dp).width(80.dp),
+              contentDescription = "")
         Spacer(modifier = Modifier.padding(vertical = 15.dp))
 
-        var usuario = remember { mutableStateOf("") }
-        OutlinedTextField(value = usuario.value, onValueChange = {usuario.value = it}, label = { Text("Ingresa tu usuario") })
+        //caja de tecto de usuario
+        OutlinedTextField(value = usuario.value,
+                          onValueChange = {usuario.value = it},
+                          singleLine = true,
+                          isError = errorUsuario.value,
+                          label = { Text("Ingresa tu usuario") })
+
+        if (errorUsuario.value){
+            Text(color = Color.Red, text = "No deje usuario vacio")
+        }
         Spacer(modifier = Modifier.padding(vertical = 5.dp))
 
-        var password = remember { mutableStateOf("") }
-        OutlinedTextField(value = password.value, onValueChange = {password.value = it}, label = { Text("Ingresa tu contraseña") })
+        //caja de teto de password
+        OutlinedTextField(value = password.value,
+                          onValueChange = {password.value = it},
+                          singleLine = true,
+                          visualTransformation = PasswordVisualTransformation(),
+                          isError = errorPassword.value,
+                          label = { Text("Ingresa tu contraseña") })
+        if (errorPassword.value){
+            Text(color = Color.Red, text = "No deje password vacio")
+        }
         Spacer(modifier = Modifier.padding(vertical = 15.dp))
 
+        //boton
         Row (modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center){
             Button(onClick = {
-                navController.navigate(route = AppScrenns.MainScreen.ruta)
+
+                if (usuario.value.isEmpty())
+                    errorUsuario.value = true
+                else{
+                    errorUsuario.value = false
+                }
+
+                if (password.value.isEmpty())
+                    errorPassword.value = true
+                else{
+                    errorPassword.value = false
+                }
+
             }, modifier = Modifier.width(220.dp)) {
                 Text(text = "Iniciar Sesion")
-
             }
         }
     }
