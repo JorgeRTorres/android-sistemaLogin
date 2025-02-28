@@ -95,6 +95,10 @@ fun LoginScreen(navController: NavController){
                     errorPassword.value = false
                 }
 
+                if(!errorUsuario.value && !errorPassword.value){
+                    navController.navigate(AppScrenns.MainScreen.ruta)
+                }
+
             }, modifier = Modifier.width(220.dp)) {
                 Text(text = "Iniciar Sesion")
             }
