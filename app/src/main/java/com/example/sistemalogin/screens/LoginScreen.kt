@@ -59,7 +59,8 @@ fun LoginScreen(navController: NavController){
 
         //caja de tecto de usuario
         OutlinedTextField(value = usuario.value,
-                          onValueChange = {usuario.value = it},
+                          onValueChange = {usuario.value = it
+                                          errorUsuario.value = it.isEmpty()},
                           singleLine = true,
                           isError = errorUsuario.value,
                           label = { Text("Ingresa tu usuario") },
@@ -76,7 +77,8 @@ fun LoginScreen(navController: NavController){
 
         //caja de teto de password
         OutlinedTextField(value = password.value,
-                          onValueChange = {password.value = it},
+                          onValueChange = {password.value = it
+                                          errorPassword.value = it.isEmpty()},
                           singleLine = true,
                           visualTransformation = PasswordVisualTransformation(),
                           isError = errorPassword.value,
